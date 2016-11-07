@@ -121,7 +121,7 @@ void AP_Mount_Backend::update_targets_from_rc()
 // returns the angle (degrees*100) that the RC_Channel input is receiving
 int32_t AP_Mount_Backend::angle_input(RC_Channel* rc, int16_t angle_min, int16_t angle_max)
 {
-    return (rc->get_reverse() ? -1 : 1) * (rc->get_radio_in() - rc->get_radio_min()) 
+    return (rc->get_reverse() ? -1 : 1) * (rc->get_radio_in() - rc->get_radio_min())
       * (int32_t)(angle_max - angle_min) / (rc->get_radio_max() - rc->get_radio_min()) + (rc->get_reverse() ? angle_max : angle_min);
 }
 
@@ -150,6 +150,6 @@ void AP_Mount_Backend::calc_angle_to_location(const struct Location &target, Vec
     // pan calcs
     if (calc_pan) {
         // calc absolute heading and then onvert to vehicle relative yaw
-        angles_to_target_rad.z = wrap_PI(atan2f(GPS_vector_x, GPS_vector_y) - _frontend._ahrs.yaw);
+        angles_to_target_rad.z = wrap_PI(atan2f(GPS_vector_x, GPS_vector_y));
     }
 }
